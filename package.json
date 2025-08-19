@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development tsx server/index.ts",
     "build": "tsc -b && vite build",
-    "vercel-build": "vite build",
     "serve": "cross-env NODE_ENV=production node dist-server/index.cjs",
     "lint": "eslint .",
     "preview": "vite preview"
