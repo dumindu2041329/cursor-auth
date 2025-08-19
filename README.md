@@ -1,0 +1,2 @@
+# cursor-auth
+Authentication system
