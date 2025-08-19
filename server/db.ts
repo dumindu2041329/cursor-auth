@@ -1,3 +1,4 @@
+// Deprecated: file-based demo DB. Keeping types for reuse in Supabase repo.
 import fs from 'fs'
 import path from 'path'
 
