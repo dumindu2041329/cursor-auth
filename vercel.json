@@ -3,8 +3,7 @@
   "builds": [
     {
       "src": "api/index.ts",
-      "use": "@vercel/node",
-      "config": { "includeFiles": "server/data/db.json" }
+      "use": "@vercel/node"
     },
     {
       "src": "package.json",
