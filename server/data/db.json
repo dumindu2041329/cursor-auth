@@ -1,0 +1,83 @@
+{
+  "users": [
+    {
+      "id": "bfe5cbb6-3d93-4288-a012-d1cd9436f4ba",
+      "name": "Dumindu Damsara",
+      "email": "dumindudamsara60@gmail.com",
+      "avatarUrl": "",
+      "salt": "$2b$10$3KYNxqTqTnuxycXOsXm/Y.",
+      "passwordHash": "$2b$10$3KYNxqTqTnuxycXOsXm/Y.IZ4nG2vade5qgHatbLeKwPiAH8Ak4iK",
+      "createdAt": 1755623363553,
+      "updatedAt": 1755628317179,
+      "loginCount": 9,
+      "lastLoginAt": 1755628317179,
+      "emailVerified": false,
+      "provider": "password"
+    }
+  ],
+  "activities": [
+    {
+      "id": "4223cb46-45e1-4723-bfda-12acdeac502c",
+      "userId": "bfe5cbb6-3d93-4288-a012-d1cd9436f4ba",
+      "type": "auth",
+      "message": "Signed out",
+      "at": 1755628320125
+    },
+    {
+      "id": "5c732947-bf50-4e26-8e11-3dbfdba4f9cb",
+      "userId": "bfe5cbb6-3d93-4288-a012-d1cd9436f4ba",
+      "type": "auth",
+      "message": "Signed out",
+      "at": 1755627897719
+    },
+    {
+      "id": "b2844380-9ec7-45a9-9c70-b00d1fa276ff",
+      "userId": "bfe5cbb6-3d93-4288-a012-d1cd9436f4ba",
+      "type": "auth",
+      "message": "Signed out",
+      "at": 1755625255317
+    },
+    {
+      "id": "686f7c38-2009-482b-8e2b-aadf057ede31",
+      "userId": "bfe5cbb6-3d93-4288-a012-d1cd9436f4ba",
+      "type": "auth",
+      "message": "Signed out",
+      "at": 1755624750781
+    },
+    {
+      "id": "e3978082-a274-4a55-a2af-5ae1edb7150c",
+      "userId": "bfe5cbb6-3d93-4288-a012-d1cd9436f4ba",
+      "type": "auth",
+      "message": "Signed out",
+      "at": 1755624727464
+    },
+    {
+      "id": "ace92401-934e-4727-8cf7-14c00898c15c",
+      "userId": "bfe5cbb6-3d93-4288-a012-d1cd9436f4ba",
+      "type": "auth",
+      "message": "Signed out",
+      "at": 1755623696429
+    },
+    {
+      "id": "138f3123-ceb2-4caa-8dbc-eb0ff2673cb7",
+      "userId": "bfe5cbb6-3d93-4288-a012-d1cd9436f4ba",
+      "type": "auth",
+      "message": "Signed out",
+      "at": 1755623623611
+    },
+    {
+      "id": "487c3b9e-bd0d-4e84-a347-81b85f3bf5a4",
+      "userId": "bfe5cbb6-3d93-4288-a012-d1cd9436f4ba",
+      "type": "auth",
+      "message": "Signed out",
+      "at": 1755623404783
+    },
+    {
+      "id": "70a553ef-f2c3-4621-8cdd-76d2a1b16b84",
+      "userId": "bfe5cbb6-3d93-4288-a012-d1cd9436f4ba",
+      "type": "auth",
+      "message": "Signed out",
+      "at": 1755623378047
+    }
+  ]
+}
