@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import authRoutes from '../server/authRoutes'
+import { runMigrations } from '../server/runMigrations'
 
 const app = express()
 app.use(cors({ origin: true, credentials: true }))
@@ -20,6 +21,12 @@ app.use((err: any, _req: any, res: any, _next: any) => {
 })
 
 export default function handler(req: any, res: any) {
+  // Run migrations once per cold start
+  ;(globalThis as any).__ran_migrations__ = (globalThis as any).__ran_migrations__ || false
+  if (!(globalThis as any).__ran_migrations__) {
+    ;(globalThis as any).__ran_migrations__ = true
+    runMigrations().catch((e) => console.error('Migrations failed (serverless):', e))
+  }
   return app(req, res)
 }
 

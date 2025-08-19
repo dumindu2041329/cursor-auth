@@ -3,6 +3,7 @@ import type { Request, Response } from 'express'
 import path from 'path'
 import fs from 'fs'
 import authRoutes from './authRoutes'
+import { runMigrations } from './runMigrations'
 
 import dotenv from 'dotenv'
 dotenv.config()
@@ -12,6 +13,13 @@ const port = process.env.PORT ? Number(process.env.PORT) : 5173
 
 async function createServer() {
   const app = express()
+
+  // Run migrations on server start (no-op if none or already applied)
+  try {
+    await runMigrations()
+  } catch (e) {
+    console.error('Migrations failed:', e)
+  }
 
   app.use(express.json({ limit: '1mb' }))
   app.use('/api/auth', authRoutes)
