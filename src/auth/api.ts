@@ -17,6 +17,7 @@ export async function signUp(name: string, email: string, password: string): Pro
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name, email, password }),
+    credentials: 'include',
   })
   const data = await parseJson<{ user?: PublicUser; error?: string }>(res)
   if (!res.ok) throw new Error(data.error || 'Sign up failed')
@@ -28,6 +29,7 @@ export async function signIn(email: string, password: string): Promise<PublicUse
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
+    credentials: 'include',
   })
   const data = await parseJson<{ user?: PublicUser; error?: string }>(res)
   if (!res.ok) throw new Error(data.error || 'Sign in failed')
@@ -35,11 +37,11 @@ export async function signIn(email: string, password: string): Promise<PublicUse
 }
 
 export async function signOut(): Promise<void> {
-  await fetch(`${API_BASE}/signout`, { method: 'POST' })
+  await fetch(`${API_BASE}/signout`, { method: 'POST', credentials: 'include' })
 }
 
 export async function getCurrentUser(): Promise<PublicUser | null> {
-  const res = await fetch(`${API_BASE}/me`)
+  const res = await fetch(`${API_BASE}/me`, { credentials: 'include' })
   if (!res.ok) return null
   const data = await parseJson<{ user: PublicUser | null }>(res)
   return data.user ?? null
@@ -54,6 +56,7 @@ export async function updateProfile(updates: Partial<Pick<PublicUser, 'name' | '
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(updates),
+    credentials: 'include',
   })
   const data = await parseJson<{ user?: PublicUser; error?: string }>(res)
   if (!res.ok) throw new Error(data.error || 'Update failed')
@@ -65,6 +68,7 @@ export async function changePassword(currentPassword: string, newPassword: strin
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ currentPassword, newPassword }),
+    credentials: 'include',
   })
   if (!res.ok) {
     const data = await parseJson<{ error?: string }>(res)
@@ -77,6 +81,7 @@ export async function signInWithGoogleIdToken(idToken: string): Promise<PublicUs
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ idToken }),
+    credentials: 'include',
   })
   const data = await parseJson<{ user?: PublicUser; error?: string }>(res)
   if (!res.ok) throw new Error(data.error || 'Google sign-in failed')
@@ -92,7 +97,7 @@ export async function getActivityPage(
   const url = new URL(`${API_BASE}/activity`, window.location.origin)
   url.searchParams.set('page', String(page))
   url.searchParams.set('pageSize', String(pageSize))
-  const res = await fetch(url)
+  const res = await fetch(url, { credentials: 'include' })
   if (!res.ok) return { items: [], total: 0, page: 1, pageSize, totalPages: 1 }
   return parseJson(res)
 }
@@ -104,14 +109,14 @@ export async function getUserMeta(_userId: string): Promise<{
   lastLoginAt: number | null
   emailVerified: boolean
 } | null> {
-  const res = await fetch(`${API_BASE}/meta`)
+  const res = await fetch(`${API_BASE}/meta`, { credentials: 'include' })
   if (!res.ok) return null
   const data = await parseJson<{ meta: any }>(res)
   return data.meta
 }
 
 export async function getCurrentSession(): Promise<{ startedAt: number } | null> {
-  const res = await fetch(`${API_BASE}/session`)
+  const res = await fetch(`${API_BASE}/session`, { credentials: 'include' })
   if (!res.ok) return null
   const data = await parseJson<{ session: { startedAt: number } | null }>(res)
   return data.session
