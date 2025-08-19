@@ -9,6 +9,11 @@ function getDatabaseUrl(): string {
 }
 
 export async function runMigrations(): Promise<void> {
+  // Optional gate: only run when explicitly enabled
+  const auto = String(process.env.RUN_MIGRATIONS_ON_START || '').toLowerCase()
+  if (auto !== '1' && auto !== 'true') {
+    return
+  }
   const migrationsDir = path.resolve(process.cwd(), 'migrations')
   if (!fs.existsSync(migrationsDir)) return
 
@@ -29,6 +34,10 @@ export async function runMigrations(): Promise<void> {
 
     const { rows } = await client.query<{ filename: string }>('select filename from public.__migrations')
     const alreadyApplied = new Set(rows.map((r: { filename: string }) => r.filename))
+
+    // Fast return if no pending files
+    const pending = files.filter((f) => !alreadyApplied.has(f))
+    if (pending.length === 0) return
 
     for (const file of files) {
       if (alreadyApplied.has(file)) continue
