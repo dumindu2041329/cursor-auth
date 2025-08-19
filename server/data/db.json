@@ -8,14 +8,28 @@
       "salt": "$2b$10$3KYNxqTqTnuxycXOsXm/Y.",
       "passwordHash": "$2b$10$3KYNxqTqTnuxycXOsXm/Y.IZ4nG2vade5qgHatbLeKwPiAH8Ak4iK",
       "createdAt": 1755623363553,
-      "updatedAt": 1755628317179,
-      "loginCount": 9,
-      "lastLoginAt": 1755628317179,
+      "updatedAt": 1755631335672,
+      "loginCount": 11,
+      "lastLoginAt": 1755631335672,
       "emailVerified": false,
       "provider": "password"
     }
   ],
   "activities": [
+    {
+      "id": "83aa9727-1b3f-4213-ab3f-582cdb2257a5",
+      "userId": "bfe5cbb6-3d93-4288-a012-d1cd9436f4ba",
+      "type": "auth",
+      "message": "Signed out",
+      "at": 1755631340942
+    },
+    {
+      "id": "c290161e-f7d4-4d76-9ec0-532dfa8f8757",
+      "userId": "bfe5cbb6-3d93-4288-a012-d1cd9436f4ba",
+      "type": "auth",
+      "message": "Signed out",
+      "at": 1755630968448
+    },
     {
       "id": "4223cb46-45e1-4723-bfda-12acdeac502c",
       "userId": "bfe5cbb6-3d93-4288-a012-d1cd9436f4ba",
