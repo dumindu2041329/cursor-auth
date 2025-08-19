@@ -4,7 +4,9 @@ import authRoutes from '../server/authRoutes'
 
 const app = express()
 app.use(cors({ origin: true, credentials: true }))
-app.options('*', cors({ origin: true, credentials: true }))
+// Express 5 + path-to-regexp v6 does not support '*' string paths
+// Use a RegExp to handle all OPTIONS preflight requests
+app.options(/.*/, cors({ origin: true, credentials: true }))
 app.use(express.json({ limit: '1mb' }))
 app.use('/api/auth', authRoutes)
 app.get('/api/health', (_req, res) => {
