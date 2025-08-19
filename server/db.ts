@@ -26,26 +26,40 @@ type DbSchema = {
   activities: Activity[]
 }
 
-const dataDir = path.resolve(process.cwd(), 'server', 'data')
-const dbFile = path.join(dataDir, 'db.json')
+// In serverless (Vercel), the filesystem is read-only except for /tmp.
+// Use /tmp for runtime writes and seed from the repo's read-only data if available.
+const isServerless = !!process.env.VERCEL
+const runtimeDataDir = isServerless
+  ? path.join('/tmp', 'cursor-auth')
+  : path.resolve(process.cwd(), 'server', 'data')
+const runtimeDbFile = path.join(runtimeDataDir, 'db.json')
+const seedDbFile = path.resolve(process.cwd(), 'server', 'data', 'db.json')
 
 function ensureDb() {
-  if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true })
-  if (!fs.existsSync(dbFile)) {
+  if (!fs.existsSync(runtimeDataDir)) fs.mkdirSync(runtimeDataDir, { recursive: true })
+  if (!fs.existsSync(runtimeDbFile)) {
+    if (fs.existsSync(seedDbFile)) {
+      try {
+        fs.copyFileSync(seedDbFile, runtimeDbFile)
+        return
+      } catch {
+        // fall through to creating a new file if copy fails
+      }
+    }
     const initial: DbSchema = { users: [], activities: [] }
-    fs.writeFileSync(dbFile, JSON.stringify(initial, null, 2))
+    fs.writeFileSync(runtimeDbFile, JSON.stringify(initial, null, 2))
   }
 }
 
 export function readDb(): DbSchema {
   ensureDb()
-  const raw = fs.readFileSync(dbFile, 'utf-8')
+  const raw = fs.readFileSync(runtimeDbFile, 'utf-8')
   return JSON.parse(raw) as DbSchema
 }
 
 export function writeDb(db: DbSchema) {
   ensureDb()
-  fs.writeFileSync(dbFile, JSON.stringify(db, null, 2))
+  fs.writeFileSync(runtimeDbFile, JSON.stringify(db, null, 2))
 }
 
 export function toPublic(u: StoredUser): PublicUser {

@@ -15,7 +15,8 @@ router.use((req, _res, next) => {
 
 const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret_change_me'
 const COOKIE_NAME = 'session'
-const COOKIE_OPTS = { httpOnly: true, sameSite: 'lax' as const, secure: false, path: '/' }
+const isProd = process.env.NODE_ENV === 'production' || !!process.env.VERCEL
+const COOKIE_OPTS = { httpOnly: true, sameSite: 'lax' as const, secure: isProd, path: '/' }
 
 function signToken(userId: string) {
   return jwt.sign({ sub: userId }, JWT_SECRET, { expiresIn: '7d' })
