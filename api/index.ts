@@ -1,6 +1,5 @@
 import express from 'express'
 import cors from 'cors'
-import serverless from 'serverless-http'
 import authRoutes from '../server/authRoutes'
 
 const app = express()
@@ -18,10 +17,8 @@ app.use((err: any, _req: any, res: any, _next: any) => {
   if (!res.headersSent) res.status(500).json({ error: 'Server error' })
 })
 
-const handler = serverless(app)
-
-export default async function(req: any, res: any) {
-  return handler(req, res)
+export default function handler(req: any, res: any) {
+  return app(req, res)
 }
 
 
